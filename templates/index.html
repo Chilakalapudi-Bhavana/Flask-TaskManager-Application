@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block head %}
+<title>Task Master</title>
+{% endblock %} {% block body %}
+
+<h1 style="text-align: center">Task Manager</h1>
+<center>
+<table>
+  <tr>
+    <th>Task</th>
+    <th>Date Created</th>
+    <th>Actions</th>
+  </tr>
+  {% for task in tasks %}
+  <tr>
+    <td>{{ task[1] }}</td>
+    {# task[1] is the content field in the tuple #}
+    <td>{{ task[2] }}</td>
+    {# task[2] is the date_created field in the tuple #}
+    <td>
+      <a href="/delete/{{ task[0] }}">Delete</a>
+      <br>
+      <a href="/update/{{ task[0] }}">Update</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</center>
+<center>
+    <br>
+    <br>
+
+<form method="POST">
+  <input type="text" name="content" placeholder="Task" required />
+  <input type="submit" value="Add Task" />
+</form></center>
+{% endblock %}

@@ -1,0 +1,50 @@
+
+body {
+    margin: 0;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: black;
+    background-color: whitesmoke;
+
+}
+.content {
+    margin: 0 auto;
+    width: 50%;
+}
+table, td, th {
+    border: 3px groove #b10000;
+}
+table {
+    border-collapse: collapse;
+    width: 50%;
+    align-self: center;
+    background-color:black;
+    color:white;
+}
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+.form {
+    margin-top: 30px;
+    align-self: center;
+}
+.content {
+    width: 87%;
+}
+h1{
+    text-align: center;
+}
+a{
+    color:white;
+}
+input{
+    background-color:black;
+    border: 3px groove black;
+    height: 70px;  
+    font-size: medium;
+    color:white;
+}
