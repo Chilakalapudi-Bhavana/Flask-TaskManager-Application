@@ -3,22 +3,23 @@ from datetime import datetime
 import sqlite3
 
 app = Flask(__name__)
-DATABASE = 'tesope.db'
+DATABASE = 'testpro1.db'
 
 def create_table():
     try:
-        conn = sqlite3.connect(DATABASE)
+        conn = sqlite3.connect(DATABASE, check_same_thread=False)
         c = conn.cursor()
-        c.execute('CREATE TABLE IF NOT EXISTS tab (id INTEGER PRIMARY KEY, content TEXT, date_created TIMESTAMP)')
+        c.execute('CREATE TABLE  table1 (id INTEGER PRIMARY KEY, content TEXT, date_created TIMESTAMP)')
         conn.commit()
         conn.close()
     except:
+        print("table already exists")
         pass
 
 def get_tasks():
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
-    c.execute('SELECT * FROM tab ORDER BY date_created')
+    c.execute('SELECT * FROM table1 ORDER BY date_created')
     tasks = c.fetchall()
     conn.close()
     return tasks
@@ -26,21 +27,21 @@ def get_tasks():
 def add_task(content):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
-    c.execute('INSERT INTO tab (content, date_created) VALUES (?, ?)', (content, datetime.utcnow()))
+    c.execute('INSERT INTO table1 (content, date_created) VALUES (?, ?)', (content, datetime.utcnow()))
     conn.commit()
     conn.close()
 
 def delete_task(id):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
-    c.execute('DELETE FROM tab WHERE id = ?', (id,))
+    c.execute('DELETE FROM table1 WHERE id = ?', (id,))
     conn.commit()
     conn.close()
 
 def update_task(id, content):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
-    c.execute('UPDATE tab SET content = ? WHERE id = ?', (content, id))
+    c.execute('UPDATE table1 SET content = ? WHERE id = ?', (content, id))
     conn.commit()
     conn.close()
 
@@ -73,7 +74,6 @@ def update(id):
                 task = t
                 break
         return render_template('update.html', task=task)
-
+create_table()
 if __name__ == "__main__":
-    create_table()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int("3000"), debug=True)
